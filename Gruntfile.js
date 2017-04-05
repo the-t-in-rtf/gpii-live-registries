@@ -1,12 +1,13 @@
 /* global module */
+"use strict";
 module.exports = function (grunt) {
-    "use strict";
     grunt.initConfig({
         eslint: {
             src: ["./src/**/*.js", "./tests/**/*.js", "./*.js"]
         },
         jsonlint: {
-            src: ["src/**/*.json", "tests/**/*.json", "./*.json"]
+            // The double syntax for the tests is required because we intentionally have an invalid JSON file.
+            src: ["src/**/*.json", "./*.json", "tests/!(data)/**/*.json", "tests/data/loaderDirs/!(invalidOptionsFile)/**/*.json"]
         }
     });
 

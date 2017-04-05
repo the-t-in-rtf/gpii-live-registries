@@ -12,7 +12,7 @@ data in this package describes:
 7. How each setting relates to a general need or preference.
 
 The Live Solutions Registry (this package) is not intended for end users to contribute to.  Its core is a series of
-[JSON5](http://json5.org/) text files that are digested, filtered, and used directly within the GPII.  These files
+[JSON](http://json.org/) text files that are digested, filtered, and used directly within the GPII.  These files
 follow [a precise format](./docs/options-files.md) and must be carefully tested to ensure that:
 
  1. The GPII itself continues to function when the settings are used.
@@ -21,7 +21,7 @@ follow [a precise format](./docs/options-files.md) and must be carefully tested 
 Contributors are expected to understand:
 
 1. How to collect settings information about solutions (for example, by looking through the Windows Registry).
-2. How to represent information about solutions and settings in [our supported JSON5 format](./docs/options-files.md).
+2. How to represent information about solutions and settings in [our supported JSON format](./docs/options-files.md).
 3. How to test their work both manually, and [with automated tests](./docs/running-tests.md).
 4. How to submit information for review via a development workflow (and how to respond to review feedback).
 

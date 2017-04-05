@@ -1,0 +1,1 @@
+This file should be ignored when scanning for options files.

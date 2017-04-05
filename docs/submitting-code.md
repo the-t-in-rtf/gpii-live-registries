@@ -10,7 +10,7 @@ any Windows program, we might use the base namespace `gpii.solutions.windows`, a
 
 We might also make something specific to a particular solutions.  For example, in the
 [options files documentation](./submitting-code.md), We talked about creating the file
-`data/gpii/solutions/windows/myHelpfulProgram/v20.json5`.  If we needed a custom function for version 20 (and
+`data/gpii/solutions/windows/myHelpfulProgram/v20.json`.  If we needed a custom function for version 20 (and
 presumably beyond), we can use the `data.gpii.solutions.windows.myHelpfulProgram` namespace, as in the following
 example:
 
