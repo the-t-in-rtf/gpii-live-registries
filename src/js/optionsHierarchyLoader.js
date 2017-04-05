@@ -40,7 +40,7 @@ gpii.lsr.optionsLoader.loadAllOptions = function (rootDir) {
 
 /**
  *
- * Search `singlePath` for JSON/JSON5 files and return an array containing their paths relative to singlePath.  This
+ * Search `singlePath` for JSON files and return an array containing their paths relative to singlePath.  This
  * function calls itself recursively on any directories it encounters.
  *
  * @param singlePath {String} - The relative path to a directory we wish to scan for JSON files.
