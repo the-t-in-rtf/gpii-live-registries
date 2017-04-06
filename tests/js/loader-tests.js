@@ -14,28 +14,6 @@ gpii.lsr.loadTestingSupport();
 
 var jqUnit = require("node-jqUnit");
 
-fluid.registerNamespace("gpii.tests.lsr.loader");
-
-gpii.tests.lsr.loader.generateExpectedResultHandler = function (message, pattern) {
-    return function (result) {
-        jqUnit.start();
-        jqUnit.assert(message + " (the promise reached the expected outcome)");
-        if (pattern) {
-            jqUnit.assertNotNull(message + " (the promise results were as expected)", result.match(pattern));
-        }
-    };
-};
-
-gpii.tests.lsr.loader.generateUnexpectedResultHandler = function (message) {
-    return function () {
-        jqUnit.start();
-        jqUnit.fail(message);
-    };
-};
-
-gpii.tests.lsr.loader.failOnUnexpectedSuccess = gpii.tests.lsr.loader.generateUnexpectedResultHandler("The promise should not have been resolved.");
-gpii.tests.lsr.loader.failOnUnexpectedFailure = gpii.tests.lsr.loader.generateUnexpectedResultHandler("The promise should not have been rejected.");
-
 jqUnit.module("Unit tests for options loader...");
 
 jqUnit.test("We should be able to find paths to JSON files in a valid directory...", function () {
@@ -63,15 +41,15 @@ jqUnit.asyncTest("We should be able to load options from JSON files in a valid d
             fluid.invokeGlobalFunction("root");
             fluid.invokeGlobalFunction("subdir.base");
         },
-        gpii.tests.lsr.loader.failOnUnexpectedFailure
+        gpii.tests.lsr.failOnUnexpectedFailure(jqUnit)
     );
 });
 
 jqUnit.asyncTest("Options loading should require a root directory...", function () {
     jqUnit.expect(2);
     gpii.lsr.optionsLoader.loadAllOptions().then(
-        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
-        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "must specify the location")
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "must specify the location")
     );
 });
 
@@ -80,8 +58,8 @@ jqUnit.asyncTest("An error should be thrown if we try to load options from a non
     var resolvedRootDir = fluid.module.resolvePath("%gpii-live-solutions-registry/missing");
 
     gpii.lsr.optionsLoader.loadAllOptions(resolvedRootDir).then(
-        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
-        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "does not exist")
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "does not exist")
     );
 });
 
@@ -90,8 +68,8 @@ jqUnit.asyncTest("An error should be thrown if we try to load invalid options fi
     var resolvedRootDir = fluid.module.resolvePath("%gpii-live-solutions-registry/tests/data/loaderDirs/invalidOptionsFile");
 
     gpii.lsr.optionsLoader.loadAllOptions(resolvedRootDir).then(
-        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
-        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "JSON parse error")
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "JSON parse error")
     );
 });
 
@@ -100,8 +78,8 @@ jqUnit.asyncTest("An error should be thrown if we try to load a hierarchy with a
     var resolvedRootDir = fluid.module.resolvePath("%gpii-live-solutions-registry/tests/data/loaderDirs/invalidDirname");
 
     gpii.lsr.optionsLoader.loadAllOptions(resolvedRootDir).then(
-        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
-        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "Invalid directory name")
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "Invalid directory name")
     );
 });
 
@@ -110,16 +88,16 @@ jqUnit.asyncTest("An error should be thrown if we try to load a hierarchy with a
     var resolvedRootDir = fluid.module.resolvePath("%gpii-live-solutions-registry/tests/data/loaderDirs/invalidFilename");
 
     gpii.lsr.optionsLoader.loadAllOptions(resolvedRootDir).then(
-        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
-        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "Invalid file name")
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "Invalid file name")
     );
 });
 
 jqUnit.asyncTest("A valid set of options should be should result in usable component grade definitions...", function () {
     jqUnit.expect(1);
     gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/valid").then(
-        gpii.tests.lsr.loader.generateExpectedResultHandler("The promise should be resolved..."),
-        gpii.tests.lsr.loader.failOnUnexpectedFailure
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "The promise should be resolved..."),
+        gpii.tests.lsr.failOnUnexpectedFailure(jqUnit)
     );
 });
 
@@ -134,8 +112,18 @@ jqUnit.asyncTest("We should be able to confirm if there are any incomplete optio
 
     var checkPromise = gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/missingGradeNames");
     checkPromise.then(
-        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
-        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "does not have an initFunction defined")
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "does not have an initFunction defined")
     );
     checkPromise.then(removeListener, removeListener);
+});
+
+jqUnit.asyncTest("We should be able to detect duplicate gradeNames...", function () {
+    jqUnit.expect(2);
+
+    var checkPromise = gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/duplicateGradeNames");
+    checkPromise.then(
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "duplicated gradeName")
+    );
 });

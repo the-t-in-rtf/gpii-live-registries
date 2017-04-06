@@ -1,0 +1,29 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "Web Anywhere",
+  "settingsHandlers": {
+    "configure": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+      ]
+    }
+  },
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" \"http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info\""
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.windows.closeProcessByName",
+      "filename": "firefox.exe"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "name": "Android UI Settings Secure",
+  "gradeNames": ["gpii.solutions.android.base"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.androidSettings",
+      "options": {
+        "settingType": "Secure"
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "tts_default_pitch": {
+          "transform": {
+            "type": "fluid.transforms.round",
+            "input": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/pitch",
+                "factor": 500
+              }
+            }
+          }
+        },
+        "tts_default_rate": {
+          "transform": {
+            "type": "fluid.transforms.round",
+            "input": {
+              "transform": {
+                "type": "fluid.transforms.binaryOp",
+                "left": 21.753,
+                "operator": "-",
+                "right": {
+                  "transform": {
+                    "type": "fluid.transforms.binaryOp",
+                    "left": {
+                      "transform": {
+                        "type": "fluid.transforms.binaryOp",
+                        "left": 0.0317,
+                        "operator": "*",
+                        "rightPath": "http://registry\\.gpii\\.net/common/speechRate"
+                      }
+                    },
+                    "operator": "-",
+                    "right": {
+                      "transform": {
+                        "type": "fluid.transforms.binaryOp",
+                        "left": "0.0042",
+                        "operator": "*",
+                        "right": {
+                          "transform": {
+                            "type": "fluid.transforms.binaryOp",
+                            "leftPath": "http://registry\\.gpii\\.net/common/speechRate",
+                            "operator": "*",
+                            "rightPath": "http://registry\\.gpii\\.net/common/speechRate"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ]
+}

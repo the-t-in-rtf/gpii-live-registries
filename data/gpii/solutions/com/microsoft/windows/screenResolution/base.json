@@ -1,0 +1,24 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "Windows Screen Resolution",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.windows.displaySettingsHandler",
+      "capabilities": [
+        "display.screenEnhancement.screenResolution",
+        "applications.com\\.microsoft\\.windows\\.screenResolution.id"
+      ]
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

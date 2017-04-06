@@ -1,0 +1,25 @@
+{
+  "name": "GNOME Shell overrides",
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.gsettings",
+      "capabilities": [],
+      "options": {
+        "schema": "org.gnome.shell.overrides"
+      }
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "gnome-shell"
+    }
+  ]
+}

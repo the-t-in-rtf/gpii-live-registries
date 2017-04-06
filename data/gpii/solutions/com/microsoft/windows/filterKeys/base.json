@@ -1,0 +1,178 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "Windows FilterKeys",
+  "settingsHandlers": {
+    "configure": {
+      "type": "gpii.windows.spiSettingsHandler",
+      "options": {
+        "getAction": "SPI_GETFILTERKEYS",
+        "setAction": "SPI_SETFILTERKEYS",
+        "uiParam": "struct_size",
+        "pvParam": {
+          "type": "struct",
+          "name": "FILTERKEYS"
+        },
+        "verifySettings": false
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "FilterKeysEnable": {
+          "transform": {
+            "type": "fluid.transforms.binaryOp",
+            "leftPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+            "left": false,
+            "rightPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+            "right": false,
+            "operator": "||",
+            "outputPath": "value"
+          },
+          "path": {
+            "transform": {
+              "type": "fluid.transforms.literalValue",
+              "input": "pvParam.dwFlags.FKF_FILTERKEYSON"
+            }
+          }
+        },
+        "SlowKeysInterval": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+            "true": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/slowKeysInterval",
+                "factor": 1000
+              }
+            },
+            "false": 0,
+            "outputPath": "value"
+          },
+          "path": {
+            "transform": {
+              "type": "fluid.transforms.literalValue",
+              "input": "pvParam.iWaitMSec"
+            }
+          }
+        },
+        "BounceKeysInterval": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "condition": {
+              "transform": {
+                "type": "fluid.transforms.binaryOp",
+                "leftPath": "http://registry\\.gpii\\.net/common/slowKeysEnable",
+                "left": false,
+                "right": false,
+                "operator": "==="
+              }
+            },
+            "true": {
+              "transform": {
+                "type": "fluid.transforms.condition",
+                "conditionPath": "http://registry\\.gpii\\.net/common/debounceEnable",
+                "true": {
+                  "transform": {
+                    "type": "fluid.transforms.linearScale",
+                    "inputPath": "http://registry\\.gpii\\.net/common/debounceInterval",
+                    "factor": 1000
+                  }
+                },
+                "false": 0,
+                "outputPath": "value"
+              }
+            },
+            "false": 0,
+            "outputPath": "value"
+          },
+          "path": {
+            "transform": {
+              "type": "fluid.transforms.literalValue",
+              "input": "pvParam.iBounceMSec"
+            }
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {
+        "http://registry\\.gpii\\.net/common/slowKeysEnable": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "condition": {
+              "transform": {
+                "type": "fluid.transforms.binaryOp",
+                "leftPath": "SlowKeysInterval.value",
+                "right": 0,
+                "operator": ">"
+              }
+            },
+            "truePath": "FilterKeysEnable.value"
+          }
+        },
+        "http://registry\\.gpii\\.net/common/slowKeysInterval": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "condition": {
+              "transform": {
+                "type": "fluid.transforms.binaryOp",
+                "leftPath": "SlowKeysInterval.value",
+                "right": 0,
+                "operator": ">"
+              }
+            },
+            "true": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "SlowKeysInterval.value",
+                "factor": 0.001
+              }
+            }
+          }
+        },
+        "http://registry\\.gpii\\.net/common/debounceEnable": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "condition": {
+              "transform": {
+                "type": "fluid.transforms.binaryOp",
+                "leftPath": "BounceKeysInterval.value",
+                "right": 0,
+                "operator": ">"
+              }
+            },
+            "truePath": "FilterKeysEnable.value"
+          }
+        },
+        "http://registry\\.gpii\\.net/common/debounceInterval": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "condition": {
+              "transform": {
+                "type": "fluid.transforms.binaryOp",
+                "leftPath": "BounceKeysInterval.value",
+                "right": 0,
+                "operator": ">"
+              }
+            },
+            "true": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "BounceKeysInterval.value",
+                "factor": 0.001
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "configure": [
+    "settings.configure"
+  ],
+  "restore": [
+    "settings.configure"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

@@ -1,0 +1,290 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "Windows Cursors",
+  "settingsHandlers": {
+    "configure": {
+      "type": "gpii.windows.registrySettingsHandler",
+      "options": {
+        "hKey": "HKEY_CURRENT_USER",
+        "path": "Control Panel\\Cursors",
+        "dataTypes": {
+          "Arrow": "REG_SZ",
+          "Hand": "REG_SZ",
+          "Help": "REG_SZ",
+          "AppStarting": "REG_SZ",
+          "No": "REG_SZ",
+          "NWPen": "REG_SZ",
+          "SizeAll": "REG_SZ",
+          "SizeNESW": "REG_SZ",
+          "SizeNS": "REG_SZ",
+          "SizeNWSE": "REG_SZ",
+          "SizeWE": "REG_SZ",
+          "UpArrow": "REG_SZ",
+          "Wait": "REG_SZ"
+        },
+        "verifySettings": true
+      },
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/cursorSize"
+      ],
+      "capabilitiesTransformations": {
+        "Arrow": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_arrow.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_arrow_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_arrow_xl.cur"
+              }
+            ]
+          }
+        },
+        "Hand": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_link.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_link_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_link_xl.cur"
+              }
+            ]
+          }
+        },
+        "Help": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_helpsel.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_helpsel_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_helpsel_xl.cur"
+              }
+            ]
+          }
+        },
+        "AppStarting": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_working.ani"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_working_l.ani"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_working_xl.ani"
+              }
+            ]
+          }
+        },
+        "No": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_unavail.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_unavail_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_unavail_xl.cur"
+              }
+            ]
+          }
+        },
+        "NWPen": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_pen.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_pen_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_pen_xl.cur"
+              }
+            ]
+          }
+        },
+        "SizeAll": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_move.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_move_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_move_xl.cur"
+              }
+            ]
+          }
+        },
+        "SizeNESW": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_nesw.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_nesw_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_nesw_xl.cur"
+              }
+            ]
+          }
+        },
+        "SizeNS": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_ns.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_ns_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_ns_xl.cur"
+              }
+            ]
+          }
+        },
+        "SizeNWSE": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_nwse.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_nwse_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_nwse_xl.cur"
+              }
+            ]
+          }
+        },
+        "SizeWE": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_ew.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_ew_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_ew_xl.cur"
+              }
+            ]
+          }
+        },
+        "UpArrow": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_up.cur"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_up_l.cur"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_up_xl.cur"
+              }
+            ]
+          }
+        },
+        "Wait": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "ranges": [
+              {
+                "upperBound": 0.333,
+                "output": "%SystemRoot%\\cursors\\aero_busy.ani"
+              }, {
+                "upperBound": 0.666,
+                "output": "%SystemRoot%\\cursors\\aero_busy_l.ani"
+              }, {
+                "output": "%SystemRoot%\\cursors\\aero_busy_xl.ani"
+              }
+            ]
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {
+        "transform": [
+          {
+            "type": "fluid.transforms.valueMapper",
+            "defaultInputPath": "Arrow",
+            "defaultOutputPath": "http://registry\\.gpii\\.net/common/cursorSize",
+            "match": {
+              "%SystemRoot%\\cursors\\aero_arrow.cur": 0.32,
+              "%SystemRoot%\\cursors\\aero_arrow_l.cur": 0.65,
+              "%SystemRoot%\\cursors\\aero_arrow_xl.cur": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "configure": [
+    "settings.configure"
+  ],
+  "restore": [
+    "settings.configure",
+    {
+      "type": "gpii.windows.spiSettingsHandler.updateCursors"
+    }
+  ],
+  "start": [
+    {
+      "type": "gpii.windows.spiSettingsHandler.updateCursors"
+    }
+  ],
+  "stop": [
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

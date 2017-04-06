@@ -1,0 +1,25 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "GNOME desktop Window Manager preferences",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.gsettings",
+      "capabilities": [],
+      "options": {
+        "schema": "org.gnome.desktop.wm.preferences"
+      }
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "gnome-shell"
+    }
+  ]
+}

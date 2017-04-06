@@ -1,0 +1,65 @@
+{
+  "name": "Omnitor eCtouch/eCmobile",
+  "gradeNames": ["gpii.solutions.android.base"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.XMLHandler",
+      "options": {
+        "filename": "/sdcard/output.xml",
+        "encoding": "utf-8",
+        "xml-tag": "<?xml version='1.0' encoding='utf-8' standalone='yes' ?>",
+        "rules": {
+          "map": "map",
+          "map.string": {
+            "transform": {
+              "type": "fluid.transforms.arrayToObject",
+              "inputPath": "map.string",
+              "key": "name"
+            }
+          }
+        }
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "map\\.string\\.fontsize\\.$t": {
+          "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+            "factor": 2
+          }
+        },
+        "map\\.string\\.theme\\.$t": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+            "true": "yellow-black",
+            "truePath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+            "false": "none"
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "start": [
+    {
+      "type": "gpii.androidActivityManager.startActivityByPackageName",
+      "packageName": "se.omnitor.ecmobile"
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.androidActivityManager.stopActivityByPackageName",
+      "packageName": "se.omnitor.ecmobile"
+    },
+    {
+      "type": "gpii.androidActivityManager.goToHomeScreen"
+    }
+  ]
+}

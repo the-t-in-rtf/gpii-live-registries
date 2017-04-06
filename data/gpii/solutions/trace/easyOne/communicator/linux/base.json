@@ -1,0 +1,38 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "EasyOne Communicator Linux",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/simplification"
+      ]
+    }
+  },
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "google-chrome http://easy123.org/user/${{userToken}}"
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "pkill -2 chrome"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "google-chrome-beta"
+    },
+    {
+      "type": "gpii.packageKit.find",
+      "name": "google-chrome-stable"
+    },
+    {
+      "type": "gpii.packageKit.find",
+      "name": "google-chrome-unstable"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "FreeSpeech",
+  "gradeNames": ["gpii.solutions.android.base"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+      ]
+    }
+  },
+  "start": [
+    {
+      "type": "gpii.androidActivityManager.startFreespeech"
+    }
+  ]
+}

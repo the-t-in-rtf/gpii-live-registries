@@ -1,0 +1,11 @@
+{
+  "gradeNames": ["fluid.component"],
+  "contexts": {
+    "OS": [
+      {
+        "id": "android",
+        "version": ">=0.1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "Read Write Gold",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.XMLHandler",
+      "options": {
+        "filename": "${{environment}.APPDATA}\\Texthelp\\ReadAndWrite\\11\\RWSettings11.xml",
+        "encoding": "utf-8",
+        "xml-tag": "<?xml version=\"1.0\" encoding=\"utf-8\"?>"
+      },
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/languageAssistance"
+      ],
+      "capabilitiesTransformations": {
+        "ApplicationSettings": "ApplicationSettings"
+      }
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "\"${{registry}.HKEY_CURRENT_USER\\Software\\Texthelp\\Read&Write11\\InstallPath}\\ReadAndWrite.exe\""
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.windows.closeProcessByName",
+      "filename": "ReadAndWrite.exe"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.registryKeyExists",
+      "hKey": "HKEY_CURRENT_USER",
+      "path": "Software\\Texthelp\\Read&Write11",
+      "subPath": "InstallPath",
+      "dataType": "REG_SZ"
+    }
+  ]
+}

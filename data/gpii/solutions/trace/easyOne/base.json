@@ -1,0 +1,14 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "stop": [
+    {
+      "type": "gpii.windows.closeProcessByName",
+      "filename": "firefox.exe"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "gradeNames": ["fluid.component"],
+  "contexts": {
+    "OS": [
+      {
+        "id": "win32"
+      }
+    ]
+  },
+  // TODO: Talk with the team about what globally resolvable mocks are needed (registry, environment, et cetera)
+  components: {
+    environment: { type: "fluid.component"},
+    registry:    { type: "fluid.component"}
+  }
+}

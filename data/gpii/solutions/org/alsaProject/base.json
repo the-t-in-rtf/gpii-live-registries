@@ -1,0 +1,38 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "ALSA System Volume",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.alsa",
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "masterVolume": {
+          "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "http://registry\\.gpii\\.net/common/volume",
+            "factor": 100
+          }
+        }
+      }
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "update": [
+    "settings.configuration"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "alsa"
+    },
+    {
+      "type": "gpii.packageKit.find",
+      "name": "alsa-lib"
+    }
+  ]
+}

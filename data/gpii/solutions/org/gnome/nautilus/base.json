@@ -1,0 +1,29 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "GNOME Nautilus Settings",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.gsettings",
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "font": "http://registry\\.gpii\\.net/common/0"
+      },
+      "options": {
+        "schema": "org.gnome.nautilus.desktop"
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "nautilus"
+    }
+  ]
+}

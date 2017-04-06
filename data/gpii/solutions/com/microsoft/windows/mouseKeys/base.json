@@ -1,0 +1,107 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "Windows MouseKeys",
+  "settingsHandlers": {
+    "configure": {
+      "type": "gpii.windows.spiSettingsHandler",
+      "options": {
+        "getAction": "SPI_GETMOUSEKEYS",
+        "setAction": "SPI_SETMOUSEKEYS",
+        "uiParam": "struct_size",
+        "pvParam": {
+          "type": "struct",
+          "name": "MOUSEKEYS"
+        },
+        "verifySettings": true
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "MouseKeysOn": {
+          "transform": {
+            "type": "fluid.transforms.value",
+            "inputPath": "http://registry\\.gpii\\.net/common/mouseEmulationEnabled",
+            "outputPath": "value"
+          },
+          "path": {
+            "transform": {
+              "type": "fluid.transforms.literalValue",
+              "input": "pvParam.dwFlags.MKF_MOUSEKEYSON"
+            }
+          }
+        },
+        "MaxSpeed": {
+          "transform": {
+            "type": "fluid.transforms.round",
+            "input": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/cursorSpeed",
+                "factor": 350,
+                "offset": 10
+              }
+            },
+            "outputPath": "value"
+          },
+          "path": {
+            "transform": {
+              "type": "fluid.transforms.literalValue",
+              "input": "pvParam.iMaxSpeed"
+            }
+          }
+        },
+        "Acceleration": {
+          "transform": {
+            "type": "fluid.transforms.binaryOp",
+            "left": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/initDelay",
+                "factor": 1000,
+                "outputPath": "value"
+              }
+            },
+            "right": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/cursorAcceleration",
+                "factor": 1000,
+                "offset": 1000,
+                "outputPath": "value"
+              }
+            },
+            "operator": "+"
+          },
+          "path": {
+            "transform": {
+              "type": "fluid.transforms.literalValue",
+              "input": "pvParam.iTimeToMaxSpeed"
+            }
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {
+        "http://registry\\.gpii\\.net/common/mouseEmulationEnabled": "MouseKeysOn.value",
+        "http://registry\\.gpii\\.net/common/cursorSpeed": {
+          "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "MaxSpeed.value",
+            "factor": 0.00285714285714,
+            "offset": -0.0285714285714
+
+          }
+        }
+      }
+    }
+  },
+  "configure": [
+    "settings.configure"
+  ],
+  "restore": [
+    "settings.configure"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

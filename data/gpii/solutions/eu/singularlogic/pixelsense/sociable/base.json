@@ -1,0 +1,65 @@
+{
+  "name": "Sociable",
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.XMLHandler",
+      "options": {
+        "filename": "C:\\Sociable\\Configuration.xml",
+        "encoding": "utf-8",
+        "xml-tag": "<?xml version=\"1.0\"?>"
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "user.$t": {
+          "literalValue": 1
+        },
+        "expert.$t": {
+          "literalValue": 1
+        },
+        "careCenter.$t": {
+          "literalValue": 1
+        },
+        "screenReaderTTSEnabled": {
+          "value": "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+        },
+        "highContrastEnabled": {
+          "value": "http://registry\\.gpii\\.net/common/highContrastEnabled"
+        },
+        "fontSize": {
+          "value": {
+            "transform": {
+              "type": "fluid.transforms.quantize",
+              "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+              "ranges": [{
+                "upperBound": 14,
+                "output": "normal"
+              },{
+                "output": "large"
+              }]
+            }
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "C:\\Sociable\\Cloud4All.exe"
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "C:\\Sociable\\Cloud4All.exe -stop"
+    }
+  ]
+}

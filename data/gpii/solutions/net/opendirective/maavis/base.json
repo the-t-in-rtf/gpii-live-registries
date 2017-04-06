@@ -1,0 +1,83 @@
+{
+  "gradeNames": ["gpii.solutions.windows.win2kOrHigher"],
+  "name": "maavis",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.JSONSettingsHandler",
+      "options": {
+        "filename": "${{environment}.MAAVIS_HOME}\\MaavisMedia\\Users\\Default\\userconfig.json"
+      },
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/selfVoicingEnabled"
+      ],
+      "capabilitiesTransformations": {
+        "transform": [
+          {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+            "outputPath": "speakOnActivate",
+            "true": "yes",
+            "false": "no"
+          }, {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+            "outputPath": "speakTitles",
+            "true": "yes",
+            "false": "no"
+          }, {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/selfVoicingEnabled",
+            "outputPath": "speakLabels",
+            "true": "yes",
+            "false": "no"
+          }, {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+            "condition": false,
+            "outputPath": "theme",
+            "false": "colour",
+            "true": {
+              "transform": {
+                "type": "fluid.transforms.valueMapper",
+                "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                "match": {
+                  "black-white": "bw",
+                  "white-black": "bw",
+                  "black-yellow": "hc",
+                  "yellow-black": "hc"
+                },
+                "noMatch": {
+                  "outputValue": "bw"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "${{environment}.ComSpec} /c \"cd ${{environment}.MAAVIS_HOME} && MaavisPortable.cmd\""
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.windows.closeProcessByName",
+      "filename": "firefox.exe"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.deviceReporter.alwaysInstalled"
+    }
+  ]
+}

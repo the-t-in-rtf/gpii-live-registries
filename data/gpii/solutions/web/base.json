@@ -1,0 +1,10 @@
+{
+  "gradeNames": ["fluid.component"],
+  "contexts": {
+    "OS": [
+      {
+        "id": "web"
+      }
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "gradeNames": ["gpii.solutions.windows.base"],
+  "contexts": {
+    "OS": [
+      {
+        "id": "win32",
+        "version": ">=5.0"
+      }
+    ]
+  }
+}

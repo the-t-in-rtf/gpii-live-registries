@@ -1,0 +1,88 @@
+{
+  "gradeNames": ["gpii.solutions.web.base"],
+  "name": "Easit4all",
+  "settingsHandlers": {
+    "myconf": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "fontSize": {
+          "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+            "factor": 10
+          }
+        },
+        "fontFaceFontName": {
+          "transform": {
+            "type": "fluid.transforms.valueMapper",
+            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/fontName",
+            "match": {
+              "times": "Times New Roman",
+              "comic": "Comic Sans",
+              "arial": "Arial",
+              "verdana": "Verdana"
+            },
+            "noMatch": {
+              "outputUndefinedValue": true
+            }
+          }
+        },
+        "foregroundColor": {
+          "transform": {
+            "type": "fluid.transforms.valueMapper",
+            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/foregroundColor",
+            "match": {
+              "black": "Black",
+              "yellow": "Yellow",
+              "white": "White"
+            },
+            "noMatch": {
+              "outputUndefinedValue": true
+            }
+          }
+        },
+        "backgroundColor": {
+          "transform": {
+            "type": "fluid.transforms.valueMapper",
+            "defaultInputPath": "http://registry\\.gpii\\.net/provisional-common/backgroundColor",
+            "defaultInputValue": "default",
+            "match": {
+              "black": {
+                "outputValue": "Black"
+              },
+              "yellow": {
+                "outputValue": "Yellow"
+              },
+              "white": {
+                "outputValue": "White"
+              },
+              "default": {
+                "undefinedOuputValue": true
+              }
+            }
+          }
+        },
+        "lineSpacing": "http://registry\\.gpii\\.net/provisional-common/lineSpacing",
+        "inputsLarger": "http://registry\\.gpii\\.net/provisional-common/inputsLarger",
+        "toc": "http://registry\\.gpii\\.net/provisional-common/tableOfContents",
+        "links": "http://registry\\.gpii\\.net/provisional-common/emphasizeLinks",
+        "layout": "http://registry\\.gpii\\.net/provisional-common/simplifyLayout",
+        "invertImages": "http://registry\\.gpii\\.net/common/invertColours",
+        "tracking": "http://registry\\.gpii\\.net/provisional-common/magnifierFollows",
+        "magnification": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/magnification",
+            "ranges": [
+              {
+                "output": 1
+              }
+            ]
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  }
+}

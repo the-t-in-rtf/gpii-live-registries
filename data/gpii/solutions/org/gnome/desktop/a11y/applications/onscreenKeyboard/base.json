@@ -1,0 +1,30 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "GNOME Assistive Technology - Screen Keyboard",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/onScreenKeyboardEnabled"
+      ]
+    }
+  },
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled true"
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "gsettings set org.gnome.desktop.a11y.applications screen-keyboard-enabled false"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "gnome-shell"
+    }
+  ]
+}

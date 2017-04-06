@@ -1,0 +1,63 @@
+{
+  "gradeNames": ["gpii.solutions.web.base"],
+  "name": "C4A-TVM",
+  "settingsHandlers": {
+    "conf": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/highContrastTheme",
+        "http://registry\\.gpii\\.net/common/fontSize"
+      ],
+      "capabilitiesTransformations": {
+        "language": "http://registry\\.gpii\\.net/common/language",
+        "contrastTheme": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/highContrastEnabled",
+            "true": {
+              "transform": {
+                "type": "fluid.transforms.valueMapper",
+                "defaultInputPath": "http://registry\\.gpii\\.net/common/highContrastTheme",
+                "match": {
+                  "white-black": "yellow-black",
+                  "yellow-black": "yellow-black"
+                }
+              }
+            }
+          }
+        },
+        "fontSize": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/fontSize",
+            "ranges": [
+              {
+                "upperBound": 18,
+                "output": "default"
+              },
+              {
+                "output": "big"
+              }
+            ]
+          }
+        },
+        "timeOut": {
+          "transform": {
+            "type": "fluid.transforms.quantize",
+            "inputPath": "http://registry\\.gpii\\.net/common/sessionTimeout",
+            "ranges": [
+              {
+                "upperBound": 30,
+                "output": "default"
+              },
+              {
+                "output": "long"
+              }
+            ]
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  }
+}

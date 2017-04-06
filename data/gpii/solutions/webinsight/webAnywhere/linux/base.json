@@ -1,0 +1,38 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "Web Anywhere",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/screenReaderTTSEnabled"
+      ]
+    }
+  },
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "google-chrome http://webanywhere.cs.washington.edu/beta/?starting_url=http%3A%2F%2Fcloud4all.info"
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "pkill -2 chrome"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "google-chrome-beta"
+    },
+    {
+      "type": "gpii.packageKit.find",
+      "name": "google-chrome-stable"
+    },
+    {
+      "type": "gpii.packageKit.find",
+      "name": "google-chrome-unstable"
+    }
+  ]
+}

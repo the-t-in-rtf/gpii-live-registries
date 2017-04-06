@@ -1,0 +1,99 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "GNOME Shell Magnifier",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.gsettings",
+      "options": {
+        "schema": "org.gnome.desktop.a11y.magnifier"
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "mag-factor": "http://registry\\.gpii\\.net/common/magnification",
+        "show-cross-hairs": "http://registry\\.gpii\\.net/common/showCrosshairs",
+        "transform": {
+          "type": "fluid.transforms.arrayToSetMembership",
+          "inputPath": "http://registry\\.gpii\\.net/common/tracking",
+          "outputPath": "",
+          "presentValue": "proportional",
+          "missingValue": "none",
+          "options": {
+            "focus": "focus-tracking",
+            "caret": "caret-tracking",
+            "mouse": "mouse-tracking"
+          }
+        },
+        "screen-position": {
+          "transform": {
+            "type": "fluid.transforms.valueMapper",
+            "defaultInputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+            "match": {
+              "FullScreen": "full-screen",
+              "Lens": "full-screen",
+              "LeftHalf": "left-half",
+              "RightHalf": "right-half",
+              "TopHalf": "top-half",
+              "BottomHalf": "bottom-half"
+            },
+            "noMatch": {
+              "outputValue": "full-screen"
+            }
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {
+        "http://registry\\.gpii\\.net/common/magnification": "mag-factor",
+        "http://registry\\.gpii\\.net/common/showCrosshairs": "show-cross-hairs",
+        "transform": [
+          {
+            "type": "fluid.transforms.valueMapper",
+            "defaultInputPath": "screen-position",
+            "defaultOutputPath": "http://registry\\.gpii\\.net/common/magnifierPosition",
+            "match": {
+              "full-screen": "FullScreen",
+              "left-half": "LeftHalf",
+              "right-half": "RightHalf",
+              "top-half": "TopHalf",
+              "bottom-half": "BottomHalf"
+            }
+          },
+          {
+            "type": "fluid.transforms.valueMapper",
+            "defaultOutputPath": "http://registry\\.gpii\\.net/common/tracking",
+            "defaultInputPath": "mouse-tracking",
+            "match": {
+              "centered": "mouse"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "update": [
+    "settings.configuration"
+  ],
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ],
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled true"
+    }
+  ],
+  "stop": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "gsettings set org.gnome.desktop.a11y.applications screen-magnifier-enabled false"
+    }
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "gnome-shell"
+    }
+  ]
+}

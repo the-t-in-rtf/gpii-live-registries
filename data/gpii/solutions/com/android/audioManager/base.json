@@ -1,0 +1,43 @@
+{
+  "name": "Android Audio Manager",
+  "gradeNames": ["gpii.solutions.android.base"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.androidAudioManager.volume",
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "STREAM_MUSIC": {
+          "transform": {
+            "type": "fluid.transforms.round",
+            "input": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/volumeTTS",
+                "factor": 15
+              }
+            }
+          }
+        },
+        "STREAM_SYSTEM": {
+          "transform": {
+            "type": "fluid.transforms.round",
+            "input": {
+              "transform": {
+                "type": "fluid.transforms.linearScale",
+                "inputPath": "http://registry\\.gpii\\.net/common/volume",
+                "factor": 7
+              }
+            }
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ]
+}

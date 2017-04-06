@@ -1,0 +1,22 @@
+{
+  "gradeNames": ["gpii.solutions.linux.base"],
+  "name": "Xrandr",
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.xrandr",
+      "capabilities": []
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "stop": [
+    "settings.configuration"
+  ],
+  "isInstalled": [
+    {
+      "type": "gpii.packageKit.find",
+      "name": "libXrandr"
+    }
+  ]
+}

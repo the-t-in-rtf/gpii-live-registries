@@ -1,0 +1,18 @@
+{
+  "gradeNames": ["gpii.solutions.trace.easyOne.base"],
+  "name": "EasyOne Communicator Sudan",
+  "settingsHandlers": {
+    "configure": {
+      "type": "gpii.settingsHandlers.noSettings",
+      "capabilities": [
+        "http://registry\\.gpii\\.net/common/pictorialSimplification"
+      ]
+    }
+  },
+  "start": [
+    {
+      "type": "gpii.launch.exec",
+      "command": "\"${{registry}.HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\firefox.exe\\}\" http://easy123.org/sudan"
+    }
+  ]
+}

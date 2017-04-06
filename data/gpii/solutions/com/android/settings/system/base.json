@@ -1,0 +1,54 @@
+{
+  "name": "Android UI Settings.System",
+  "gradeNames": ["gpii.solutions.android.base"],
+  "settingsHandlers": {
+    "configuration": {
+      "type": "gpii.androidSettings",
+      "options": {
+        "settingType": "System"
+      },
+      "capabilities": [],
+      "capabilitiesTransformations": {
+        "dim_screen": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/screenDim",
+            "true": 1,
+            "false": 0
+          }
+        },
+        "haptic_feedback_enabled": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/hapticFeedback",
+            "true": 1,
+            "false": 0
+          }
+        },
+        "accelerometer_rotation": {
+          "transform": {
+            "type": "fluid.transforms.condition",
+            "conditionPath": "http://registry\\.gpii\\.net/common/screenRotation",
+            "true": 1,
+            "false": 0
+          }
+        },
+        "user_rotation": "http://registry\\.gpii\\.net/common/screenDefaultRotation",
+        "screen_off_timeout": {
+          "transform": {
+            "type": "fluid.transforms.linearScale",
+            "inputPath": "http://registry\\.gpii\\.net/common/screenOffTime",
+            "factor": 1000
+          }
+        }
+      },
+      "inverseCapabilitiesTransformations": {}
+    }
+  },
+  "configure": [
+    "settings.configuration"
+  ],
+  "restore": [
+    "settings.configuration"
+  ]
+}
