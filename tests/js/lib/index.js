@@ -6,31 +6,65 @@ fluid.registerNamespace("gpii.test.lsr");
 
 /**
  *
- * Load the options in a given directory and confirm that we can succesfully instantiate each of the components.  Calls
- * `fluid.fail` if there are errors instantiating an expected grade name based on the given directory structure.
+ * Load the options in a given directory and confirm that we can succesfully instantiate each of the components.
+ *
+ * @param rootDir {String} - The path to the root directory to scan.
+ * @returns {Promise} - A promise that will be resolved once the options have passed all checks, or that will be rejected if there are errors.
  *
  */
 gpii.test.lsr.checkOptions = function (rootDir) {
-    gpii.lsr.optionsLoader.loadAllOptions(rootDir);
+    var outerPromise = fluid.promise();
 
-    var expectedGradeNames = gpii.test.lsr.getExpectedGradeNames(rootDir);
-    fluid.each(expectedGradeNames, function (expectedGradeName) {
-        try {
-            fluid.invokeGlobalFunction(expectedGradeName);
-        }
-        catch (error) {
-            fluid.fail("The grade '" + expectedGradeName + "' could not be instantiated:\n" + (error.message || error));
-        }
-    });
+    var loaderPromise = gpii.lsr.optionsLoader.loadAllOptions(rootDir);
+
+    loaderPromise.then(
+        function () {
+            var gradeNamePromise = gpii.test.lsr.getExpectedGradeNames(rootDir);
+            gradeNamePromise.then(
+                function (expectedGradeNames)  {
+                    var promises = [];
+                    fluid.each(expectedGradeNames, function (expectedGradeName) {
+                        promises.push(function () {
+                            var gradePromise = fluid.promise();
+                            try {
+                                fluid.invokeGlobalFunction(expectedGradeName);
+                                gradePromise.resolve();
+                            }
+                            catch (error) {
+                                gradePromise.reject(error.message || error);
+                            }
+                            return gradePromise;
+                        });
+                    });
+
+                    var sequence = fluid.promise.sequence(promises);
+                    sequence.then(outerPromise.resolve, outerPromise.reject);
+                }
+            );
+        },
+        outerPromise.reject
+    );
+
+    return outerPromise;
 };
 
+/**
+ *
+ * Compile a list of grade names based on a hierarchy of subdirectories and options files.
+ *
+ * @param rootDir
+ * @return {*|{type, expressions}}
+ */
 gpii.test.lsr.getExpectedGradeNames = function (rootDir) {
     var resolvedRootDir = fluid.module.resolvePath(rootDir);
     var paths = gpii.lsr.optionsLoader.getPathsFromDir(resolvedRootDir);
 
-    var gradeNames = fluid.transform(paths, function (singlePath) {
-        return gpii.lsr.optionsLoader.gradeNameFromPath(resolvedRootDir, singlePath);
+    var promises = [];
+    fluid.each(paths, function (singlePath) {
+        promises.push(function () {
+            return gpii.lsr.optionsLoader.gradeNameFromPath(resolvedRootDir, singlePath);
+        });
     });
 
-    return gradeNames;
+    return fluid.promise.sequence(promises);
 };

@@ -141,7 +141,7 @@ gpii.lsr.optionsLoader.gradeNameFromPath = function (rootDir, filePath) {
         });
     }
 
-    // TODO: Discuss this synchronous use of a promise with Antranig.  I want the clarity of outcome and the ease of integration with the upstream promise chain, but this feels a little icky.
+    // TODO: Discuss this synchronous use of a promise with Antranig.  I want the clarity of outcome and the ease of integration with the upstream promise chain, but this check feels a little icky.
     if (!promise.disposition) {
         if (dirSegments.length) {
             var baseNamespace = dirSegments.join(".");

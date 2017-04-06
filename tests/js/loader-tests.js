@@ -115,16 +115,27 @@ jqUnit.asyncTest("An error should be thrown if we try to load a hierarchy with a
     );
 });
 
-// jqUnit.asyncTest("A valid set of options should be should result in usable component grade definitions...", function () {
-//     gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/valid");
-//
-//     jqUnit.assert("There should be no errors...");
-// });
-//
-// jqUnit.asyncTest("We should be able to confirm if there are any incomplete options files in a given hierarchy...", function () {
-//     var failingFunction = function () {
-//         gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/missingGradeNames");
-//     };
-//
-//     jqUnit.expectFrameworkDiagnostic("An error should be thrown...", failingFunction, "does not have an initFunction defined");
-// });
+jqUnit.asyncTest("A valid set of options should be should result in usable component grade definitions...", function () {
+    jqUnit.expect(1);
+    gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/valid").then(
+        gpii.tests.lsr.loader.generateExpectedResultHandler("The promise should be resolved..."),
+        gpii.tests.lsr.loader.failOnUnexpectedFailure
+    );
+});
+
+jqUnit.asyncTest("We should be able to confirm if there are any incomplete options files in a given hierarchy...", function () {
+    jqUnit.expect(2);
+
+    // Unhook the listener that turns fluid.fail calls into automatic test failures. Based on the approach used here:
+    // https://github.com/fluid-project/infusion/blob/master/tests/test-core/jqUnit/js/jqUnit.js#L278
+    // https://github.com/fluid-project/infusion/blob/master/tests/test-core/jqUnit/js/jqUnit.js#L39
+    fluid.failureEvent.addListener(fluid.identity, "jqUnit");
+    function removeListener() { fluid.failureEvent.removeListener("jqUnit"); }
+
+    var checkPromise = gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/missingGradeNames");
+    checkPromise.then(
+        gpii.tests.lsr.loader.failOnUnexpectedSuccess,
+        gpii.tests.lsr.loader.generateExpectedResultHandler("An error should be thrown...", "does not have an initFunction defined")
+    );
+    checkPromise.then(removeListener, removeListener);
+});
