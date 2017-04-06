@@ -17,15 +17,18 @@
   },
   "homepage": "https://github.com/GPII/gpii-live-solutions-registry#readme",
   "dependencies": {
-    "infusion": "git://github.com/amb26/infusion.git#3ee14d99e2169e9870dffcbd1119aa109a3277c8"
+    "infusion": "git://github.com/amb26/infusion.git#3ee14d99e2169e9870dffcbd1119aa109a3277c8",
+    "kettle": "^1.4.0"
   },
   "devDependencies": {
     "eslint": "3.15.0",
     "eslint-config-fluid": "1.1.0",
     "fluid-grunt-eslint": "18.1.2",
+    "fluid-grunt-json5lint": "1.0.0",
     "grunt": "1.0.1",
     "grunt-jsonlint": "1.1.0",
     "istanbul": "0.4.5",
+    "mkdirp": "^0.5.1",
     "node-jqunit": "1.1.4"
   }
 }
