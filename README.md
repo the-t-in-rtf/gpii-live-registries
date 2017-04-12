@@ -1,4 +1,4 @@
-# The GPII Live Solutions Registry
+# The GPII Live Registries
 
 This repository houses the fine-grained configuration data that powers [the GPII](http://gpii.net/).  The configuration
 data in this package describes:
@@ -11,7 +11,7 @@ data in this package describes:
 6. How to configure each solution's settings.
 7. How each setting relates to a general need or preference.
 
-The Live Solutions Registry (this package) is not intended for end users to contribute to.  Its core is a series of
+The GPII Live Registries package is not intended for end users to contribute to.  Its core is a series of
 [JSON](http://json.org/) text files that are digested, filtered, and used directly within the GPII.  These files
 follow [a precise format](./docs/options-files.md) and must be carefully tested to ensure that:
 
