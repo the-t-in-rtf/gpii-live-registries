@@ -111,19 +111,72 @@ gpii.lsr.optionsLoader.loadOptionsFromPaths = function (rootDir, paths) {
 
 /**
  *
- * Return a component grade namespace based on a given path and filename.  Throws an error if any part of the path
- * contains an illegal character (spaces, colons, semicolons, dots).
+ * A function to collapse duplicated segments in two arrays of segments.
+ *
+ * @param leadingSegments {Array} - The array of segments that will form the first part of the combined array.
+ * @param trailingSegments {Array} - The array of segments that will form the second part of the combined array.
+ * @returns {Array} - An array with all of the unique segments, in order.
+ *
+ */
+gpii.lsr.optionsLoader.concatUniqueSegments = function (leadingSegments, trailingSegments) {
+    var trailingSegmentsToSkip = 0;
+
+    var matchingLeadingIndices = [];
+    fluid.each(leadingSegments, function (leadingSegment, index) {
+        if (leadingSegment === trailingSegments[0]) {
+            matchingLeadingIndices.push(index);
+        }
+    });
+
+    // [0,1,2] + [1,2,3] = [0,1,2,3]
+    // [0,1,2] + [2,3,4] = [0,1,2,3,4]
+    // [0,1,2] + [0,1,2] = [0,1,2]
+    // [0,1,1] + [1,2,3] = [0,1,1,2,3]
+    // [0,1,2,1] + [1,2,3] = [0,1,2,1,2,3]
+    // [0,1,2,1,2] + [2] = [0,1,2,1,2]
+    fluid.each(matchingLeadingIndices, function (index) {
+        if (!trailingSegmentsToSkip) {
+            var mismatchFound = false;
+            for (var a = 0; a < leadingSegments.length - index; a++) {
+                if (mismatchFound) {
+                    if (leadingSegments[index + a] !== trailingSegments[a]) {
+                        mismatchFound = true;
+                    }
+                }
+            }
+            if (!mismatchFound) {
+                trailingSegmentsToSkip = leadingSegments.length - index;
+            }
+        }
+    });
+
+    return leadingSegments.concat(trailingSegments.slice(trailingSegmentsToSkip));
+};
+
+/**
+ *
+ * Return a component grade namespace based on a given path and filename.  For example, the path
+ * `rootDir/path/to/filename.json` would return `path.to.filename`.
+ *
+ * Automatically removes namespace segments duplicated between the end of the path and the beginning of the filename.
+ * For example:
+ *
+ * `rootDir/segment1/segment2/segment1.segment2.json` => `segment1.segment2
+ * `rootDir/segment1/segment2/segment3/segment2.segment3.json` => `segment1.segment2.segment3`.
+ *
+ * Throws an error if any part of the path contains an illegal character (spaces, colons, semicolons, dots).
  *
  * @param rootDir {String} - The full path to the "root directory", which will be excluded from the gradeName.
  * @param filePath {String} - The relative path to the individual file we are concerned with at the moment.
  * @return {Promise} - A promise that will either be resolved with a gradename based on the path and filename (minus extension), for example `path.to.myFile`, or rejected if an error occurs.
+ *
  */
 gpii.lsr.optionsLoader.gradeNameFromPath = function (rootDir, filePath) {
     var promise = fluid.promise();
 
     var relativePath = path.relative(rootDir, filePath);
 
-    var legalCharsRegexp = /^[A-Za-z0-9]+$/;
+    var legalCharsRegexp = /^[A-Za-z0-9\.]+$/;
 
     var pathSegments = relativePath.split(path.sep);
     var dirSegments = pathSegments.slice(0, pathSegments.length - 1);
@@ -144,8 +197,9 @@ gpii.lsr.optionsLoader.gradeNameFromPath = function (rootDir, filePath) {
     // TODO: Discuss this synchronous use of a promise with Antranig.  I want the clarity of outcome and the ease of integration with the upstream promise chain, but this check feels a little icky.
     if (!promise.disposition) {
         if (dirSegments.length) {
-            var baseNamespace = dirSegments.join(".");
-            promise.resolve([baseNamespace, fileSegmentMinusExtension].join("."));
+            var fileSubSegments = fileSegmentMinusExtension.split(".");
+            var combinedSegments = gpii.lsr.optionsLoader.concatUniqueSegments(dirSegments, fileSubSegments);
+            promise.resolve(combinedSegments.join("."));
         }
         else {
             promise.resolve(fileSegmentMinusExtension);

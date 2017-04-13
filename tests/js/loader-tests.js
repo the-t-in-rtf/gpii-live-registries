@@ -16,6 +16,77 @@ var jqUnit = require("node-jqUnit");
 
 jqUnit.module("Unit tests for options loader...");
 
+jqUnit.test("We should be able to handle duplicated path segments...", function () {
+    var testMatrix = [
+        {
+            message:          "Single duplicates should be removed...",
+            leadingSegments:  [0,1,2],
+            trailingSegments: [2,3,4],
+            expected:         [0,1,2,3,4]
+        },
+        {
+            message:          "Adjoining duplicates should be removed...",
+            leadingSegments:  [0,1,2],
+            trailingSegments: [1,2,3],
+            expected:         [0,1,2,3]
+        },
+        {
+            message:          "Segments without duplicates should be concatenated...",
+            leadingSegments:  [1,2],
+            trailingSegments: [3,4],
+            expected:         [1,2,3,4]
+        },
+        {
+            message:          "Completely duplicated groups of segments should be collapsed completely...",
+            leadingSegments:  [0,1,2],
+            trailingSegments: [0,1,2],
+            expected:         [0,1,2]
+        },
+        {
+            message:          "In repeating patterns, the longest set of duplicates should be removed...",
+            leadingSegments:  [0,1,2,1],
+            trailingSegments: [1,2,1,3],
+            expected:         [0,1,2,1,3]
+        }
+    ];
+    jqUnit.expect(testMatrix.length);
+    fluid.each(testMatrix, function (singleTestDef) {
+        var result = gpii.lsr.optionsLoader.concatUniqueSegments(singleTestDef.leadingSegments, singleTestDef.trailingSegments);
+        jqUnit.assertDeepEq(singleTestDef.message, singleTestDef.expected, result);
+    });
+});
+
+jqUnit.test("We should be able to resolve grade names from paths...", function () {
+    var testMatrix = [
+        {
+            message: "The root path should be stripped from the file path...",
+            rootDir: "root",
+            filePath: "root/path/to/filename.json",
+            expected: "path.to.filename"
+        },
+        {
+            message:  "We should be able to work with JSON5 files as well...",
+            rootDir:  "root",
+            filePath: "root/path/to/filename.json5",
+            expected: "path.to.filename"
+        },
+        {
+            message:  "Duplicate information between the path and filename should be removed...",
+            rootDir:  "root",
+            filePath: "root/one/two/three/one.two.three.json",
+            expected: "one.two.three"
+        }
+    ];
+    jqUnit.expect(testMatrix.length);
+    fluid.each(testMatrix, function (singleTestDef) {
+        gpii.lsr.optionsLoader.gradeNameFromPath(singleTestDef.rootDir, singleTestDef.filePath).then(
+            function (result) { jqUnit.assertEquals(singleTestDef.message, singleTestDef.expected, result); },
+            function (error) { jqUnit.fail(error); }
+        );
+    });
+});
+
+
 jqUnit.test("We should be able to find paths to JSON files in a valid directory...", function () {
     var resolvedRootDir = fluid.module.resolvePath("%gpii-live-solutions-registry/tests/data/loaderDirs/valid");
     var expectedDirs = fluid.transform(["root.json", "subdir/base.json"], function (relativePath) { return path.resolve(resolvedRootDir, relativePath);});
@@ -118,12 +189,22 @@ jqUnit.asyncTest("We should be able to confirm if there are any incomplete optio
     checkPromise.then(removeListener, removeListener);
 });
 
-jqUnit.asyncTest("We should be able to detect duplicate gradeNames...", function () {
+jqUnit.asyncTest("We should be able to detect duplicates caused by files with the same name and different extensions...", function () {
     jqUnit.expect(2);
 
-    var checkPromise = gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/duplicateGradeNames");
+    var checkPromise = gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/sameNameDifferentExtension");
     checkPromise.then(
         gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
-        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "An error should be thrown...", "duplicated gradeName")
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "There should be an error...", "duplicated gradeName")
+    );
+});
+
+jqUnit.asyncTest("We should be able to detect duplicates caused by collisions between the directory structure and filename...", function () {
+    jqUnit.expect(2);
+
+    var checkPromise = gpii.test.lsr.checkOptions("%gpii-live-solutions-registry/tests/data/loaderDirs/dirAndFilenameCollision");
+    checkPromise.then(
+        gpii.tests.lsr.failOnUnexpectedSuccess(jqUnit),
+        gpii.tests.lsr.generateExpectedResultHandler(jqUnit, "There should be an error...", "duplicated gradeName")
     );
 });
