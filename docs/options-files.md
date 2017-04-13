@@ -1,34 +1,31 @@
 General background
 
 The `data/gpii` directory in this repository contains a subdirectory for `solutions` and another for `settings`.  Within
-each directory is a hierarchy of subdirectories that ultimately contain one or more [JSON](http://json.org/) files.
-
-For example, the `solutions` directory is generally divided by platform, then solution, and then by distinct version, as
-in `data/gpii/solutions/windows/jaws/base.json` and `data/gpii/solutions/windows/jaws/v17.json`.
+each directory is a collection of [JSON](http://json.org/) and JSON5 files.
 
 Each of these files corresponds directly to the options used in defining a Fluid
 [component grade](http://docs.fluidproject.org/infusion/development/ComponentGrades.html).
 
 Let's say for example that you want to add information about a new Windows program call "My Helpful Program".
-You might create a new and unique directory, `data/gpii/solutions/windows/myHelpfulProgram`, and create a file
-there called `base.json` that looks something like:
+You might create a file like `data/gpii/solutions/gpii.solutions.windows.myHelpfulProgram.json` that looks something
+like:
 
 ```
 {
-    gradeNames: ["gpii.solutions.windows.base"],
+    gradeNames: ["gpii.solutions.windows"],
     // TODO: Flesh this out with meaningful examples
 }
 ```
 
-Note that we extended `gpii.solutions.windows.base`, which provides much of the common scaffolding used later in our
-grade.  If we were working with a linux program, we might extend `gpii.solutions.linux.base`.  See below for details on
+Note that we extended `gpii.solutions.windows`, which provides much of the common scaffolding used later in our
+grade.  If we were working with a linux program, we might extend `gpii.solutions.linux`.  See below for details on
 all of the platform-specific base grades.
 
 When this definition is actually used, the options payload will be used to configure a new grade, based on the filename
 and the location of the file in the directory hierarchy.  The net effect as the same as the following Javascript:
 
 ```
-fluid.defaults("gpii.solutions.windows.myHelpfulProgram.base", {
+fluid.defaults("gpii.solutions.windows.myHelpfulProgram", {
     // Options from above example, omitted for brevity.
 });
 ```
@@ -45,7 +42,7 @@ released, and that it contains a new setting.  We might create the file
 
 ```
 {
-    gradeNames: ["gpii.solutions.windows.myHelpfulProgram.base"],
+    gradeNames: ["gpii.solutions.windows.myHelpfulProgram"],
     // TODO: Different options
 }
 ```
@@ -58,15 +55,15 @@ from previous versions.  Only the information that has changed needs to be enter
 
 Describe a solution document
 
-## `gpii.solutions.base`
+## `gpii.solutions`
 
-## `gpii.solutions.windows.base`
+## `gpii.solutions.windows`
 
-## `gpii.solutions.linux.base`
+## `gpii.solutions.linux`
 
-## `gpii.solutions.android.base`
+## `gpii.solutions.android`
 
-## `gpii.solutions.web.base`
+## `gpii.solutions.web`
 
 # Settings
 
