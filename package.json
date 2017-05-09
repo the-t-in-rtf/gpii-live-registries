@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/GPII/gpii-live-solutions-registry#readme",
   "dependencies": {
+    "gpii-json-schema": "^1.0.1-dev.20170504T114351Z.4cef9db",
+    "gpii-launcher": "^1.0.0-dev.20170504T113435Z.c5b7001",
     "infusion": "git://github.com/amb26/infusion.git#3ee14d99e2169e9870dffcbd1119aa109a3277c8",
     "kettle": "^1.4.0"
   },

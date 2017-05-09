@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "id": "preference-set.json",
+  "properties": {
+    "flat": {
+      "type": "object",
+      "properties": {
+        "contexts": {
+          "type": "object",
+          "properties": {
+            "gpii-default":{
+              "$ref": "settings.json"
+            }
+          }
+        }
+      }
+    }
+  }
+}

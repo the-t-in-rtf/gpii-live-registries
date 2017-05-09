@@ -1,0 +1,153 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "id": "settings.json",
+  "properties": {
+    "http://registry.gpii.net/common/fontSize": {
+      "$ref": "common-definitions.json#/fontSize"
+    },
+    "http://registry.gpii.net/common/foregroundColor": {
+      "$ref": "common-definitions.json#/foregroundColor"
+    },
+    "http://registry.gpii.net/common/backgroundColor": {
+      "$ref": "common-definitions.json#/backgroundColor"
+    },
+    "http://registry.gpii.net/common/fontFaceFontName": {
+      "$ref": "common-definitions.json#/fontFaceFontName"
+    },
+    "http://registry.gpii.net/common/fontFaceGenericFontFace": {
+      "$ref": "common-definitions.json#/fontFaceGenericFontFace"
+    },
+    "http://registry.gpii.net/common/magnifierEnabled": {
+      "$ref": "common-definitions.json#/magnifierEnabled"
+    },
+    "http://registry.gpii.net/common/magnification": {
+      "$ref": "common-definitions.json#/magnification"
+    },
+    "http://registry.gpii.net/common/magnifierPosition": {
+      "$ref": "common-definitions.json#/magnifierPosition"
+    },
+    "http://registry.gpii.net/common/tracking": {
+      "$ref": "common-definitions.json#/tracking"
+    },
+    "http://registry.gpii.net/common/trackingTTS": {
+      "$ref": "common-definitions.json#/trackingTTS"
+    },
+    "http://registry.gpii.net/common/invertImages": {
+      "$ref": "common-definitions.json#/invertImages"
+    },
+    "http://registry.gpii.net/common/invertColours": {
+      "$ref": "common-definitions.json#/invertColours"
+    },
+    "http://registry.gpii.net/common/cursorSize": {
+      "$ref": "common-definitions.json#/cursorSize"
+    },
+    "http://registry.gpii.net/common/highContrastEnabled": {
+      "$ref": "common-definitions.json#/highContrastEnabled"
+    },
+    "http://registry.gpii.net/common/highContrastTheme": {
+      "$ref": "common-definitions.json#/highContrastTheme"
+    },
+    "http://registry.gpii.net/common/mouseTrailing": {
+      "$ref": "common-definitions.json#/mouseTrailing"
+    },
+    "http://registry.gpii.net/common/screenReaderBrailleOutput": {
+      "$ref": "common-definitions.json#/screenReaderBrailleOutput"
+    },
+    "http://registry.gpii.net/common/auditoryOutLanguage": {
+      "$ref": "common-definitions.json#/auditoryOutLanguage"
+    },
+    "http://registry.gpii.net/common/speechRate": {
+      "$ref": "common-definitions.json#/speechRate"
+    },
+    "http://registry.gpii.net/common/speakTutorialMessages": {
+      "$ref": "common-definitions.json#/speakTutorialMessages"
+    },
+    "http://registry.gpii.net/common/keyEcho": {
+      "$ref": "common-definitions.json#/keyEcho"
+    },
+    "http://registry.gpii.net/common/wordEcho": {
+      "$ref": "common-definitions.json#/wordEcho"
+    },
+    "http://registry.gpii.net/common/announceCapitals": {
+      "$ref": "common-definitions.json#/announceCapitals"
+    },
+    "http://registry.gpii.net/common/punctuationVerbosity": {
+      "$ref": "common-definitions.json#/punctuationVerbosity"
+    },
+    "http://registry.gpii.net/common/screenReaderTTSEnabled": {
+      "$ref": "common-definitions.json#/screenReaderTTSEnabled"
+    },
+    "http://registry.gpii.net/common/pitch": {
+      "$ref": "common-definitions.json#/pitch"
+    },
+    "http://registry.gpii.net/common/readingUnit": {
+      "$ref": "common-definitions.json#/readingUnit"
+    },
+    "http://registry.gpii.net/common/volumeTTS": {
+      "$ref": "common-definitions.json#/volumeTTS"
+    },
+    "http://registry.gpii.net/common/selfVoicingEnabled": {
+      "$ref": "common-definitions.json#/selfVoicingEnabled"
+    },
+    "http://registry.gpii.net/common/brailleMode": {
+      "$ref": "common-definitions.json#/brailleMode"
+    },
+    "http://registry.gpii.net/common/screenOffTime": {
+      "$ref": "common-definitions.json#/screenOffTime"
+    },
+    "http://registry.gpii.net/common/screenRotation": {
+      "$ref": "common-definitions.json#/screenRotation"
+    },
+    "http://registry.gpii.net/common/screenDefaultRotation": {
+      "$ref": "common-definitions.json#/screenDefaultRotation"
+    },
+    "http://registry.gpii.net/common/screenDim": {
+      "$ref": "common-definitions.json#/screenDim"
+    },
+    "http://registry.gpii.net/common/onScreenKeyboardEnabled": {
+      "$ref": "common-definitions.json#/onScreenKeyboardEnabled"
+    },
+    "http://registry.gpii.net/common/initDelay": {
+      "$ref": "common-definitions.json#/initDelay"
+    },
+    "http://registry.gpii.net/common/cursorSpeed": {
+      "$ref": "common-definitions.json#/cursorSpeed"
+    },
+    "http://registry.gpii.net/common/cursorAcceleration": {
+      "$ref": "common-definitions.json#/cursorAcceleration"
+    },
+    "http://registry.gpii.net/common/mouseEmulationEnabled": {
+      "$ref": "common-definitions.json#/mouseEmulationEnabled"
+    },
+    "http://registry.gpii.net/common/stickyKeys": {
+      "$ref": "common-definitions.json#/stickyKeys"
+    },
+    "http://registry.gpii.net/common/slowKeysInterval": {
+      "$ref": "common-definitions.json#/slowKeysInterval"
+    },
+    "http://registry.gpii.net/common/slowKeysEnable": {
+      "$ref": "common-definitions.json#/slowKeysEnable"
+    },
+    "http://registry.gpii.net/common/debounceEnable": {
+      "$ref": "common-definitions.json#/debounceEnable"
+    },
+    "http://registry.gpii.net/common/debounceInterval": {
+      "$ref": "common-definitions.json#/debounceInterval"
+    },
+    "http://registry.gpii.net/common/hapticFeedback": {
+      "$ref": "common-definitions.json#/hapticFeedback"
+    },
+    "http://registry.gpii.net/common/adaptationPreference": {
+      "$ref": "common-definitions.json#/adaptationPreference"
+    },
+    "http://registry.gpii.net/common/tableOfContents": {
+      "$ref": "common-definitions.json#/tableOfContents"
+    },
+    "http://registry.gpii.net/common/volume": {
+      "$ref": "common-definitions.json#/volume"
+    },
+    "http://registry.gpii.net/common/language": {
+      "$ref": "common-definitions.json#/language"
+    }
+  }
+}

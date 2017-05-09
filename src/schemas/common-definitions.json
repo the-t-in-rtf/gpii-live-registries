@@ -1,0 +1,325 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "id": "common-definitions.json",
+  "definitions": {
+    "http://registry.gpii.net/common/fontSize": {
+      "id": "#fontSize",
+      "title": "Font Size",
+      "type": "integer"
+    },
+    "http://registry.gpii.net/common/foregroundColor": {
+      "id": "#foregroundColor",
+      "title": "ForegroundColor",
+      "type": "string"
+    },
+    "http://registry.gpii.net/common/backgroundColor": {
+      "id": "#backgroundColor",
+      "title": "BackgroundColor",
+      "type": "string"
+    },
+    "http://registry.gpii.net/common/fontFaceFontName": {
+      "id": "#fontFaceFontName",
+      "title": "FontFaceFontName",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "http://registry.gpii.net/common/fontFaceGenericFontFace": {
+      "id": "#fontFaceGenericFontFace",
+      "title": "FontFaceGenericFontFace",
+      "type": "string"
+    },
+    "http://registry.gpii.net/common/magnifierEnabled": {
+      "id": "#magnifierEnabled",
+      "title": "MagnifierEnabled",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/magnification": {
+      "id": "#magnification",
+      "title": "Magnification",
+      "type": "number"
+    },
+    "http://registry.gpii.net/common/magnifierPosition": {
+      "id": "#magnifierPosition",
+      "title": "MagnifierPosition",
+      "type": "string",
+      "enum": [
+        "FullScreen",
+        "Lens",
+        "LeftHalf",
+        "RightHalf",
+        "TopHalf",
+        "BottomHalf",
+        "Custom"
+      ]
+    },
+    "http://registry.gpii.net/common/tracking": {
+      "id": "#tracking",
+      "title": "Tracking",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "focus",
+          "caret",
+          "mouse"
+        ]
+      }
+    },
+    "http://registry.gpii.net/common/trackingTTS": {
+      "id": "#trackingTTS",
+      "title": "TrackingTTS",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "focus",
+          "caret",
+          "mouse"
+        ]
+      }
+    },
+    "http://registry.gpii.net/common/invertImages": {
+      "id": "#invertImages",
+      "title": "InvertImages",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/invertColours": {
+      "id": "#invertColours",
+      "title": "InvertColours",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/cursorSize": {
+      "id": "#cursorSize",
+      "title": "CursorSize",
+      "type": "number"
+    },
+    "http://registry.gpii.net/common/highContrastEnabled": {
+      "id": "#highContrastEnabled",
+      "title": "HighContrastEnabled",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/highContrastTheme": {
+      "id": "#highContrastTheme",
+      "title": "HighContrastTheme",
+      "type": "string"
+    },
+    "http://registry.gpii.net/common/mouseTrailing": {
+      "id": "#mouseTrailing",
+      "title": "MouseTrailing",
+      "type": "integer"
+    },
+    "http://registry.gpii.net/common/screenReaderBrailleOutput": {
+      "id": "#screenReaderBrailleOutput",
+      "title": "ScreenReaderBrailleOutput",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/auditoryOutLanguage": {
+      "id": "#auditoryOutLanguage",
+      "title": "AuditoryOutLanguage",
+      "type": "string"
+    },
+    "http://registry.gpii.net/common/speechRate": {
+      "id": "#speechRate",
+      "title": "SpeechRate",
+      "type": "integer"
+    },
+    "http://registry.gpii.net/common/speakTutorialMessages": {
+      "id": "#speakTutorialMessages",
+      "title": "SpeakTutorialMessages",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/keyEcho": {
+      "id": "#keyEcho",
+      "title": "KeyEcho",
+      "type": "integer"
+    },
+    "http://registry.gpii.net/common/wordEcho": {
+      "id": "#wordEcho",
+      "title": "WordEcho",
+      "type": "integer"
+    },
+    "http://registry.gpii.net/common/announceCapitals": {
+      "id": "#announceCapitals",
+      "title": "AnnounceCapitals",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/punctuationVerbosity": {
+      "id": "#punctuationVerbosity",
+      "title": "PunctuationVerbosity",
+      "type": "string",
+      "enum": [
+        "none",
+        "some",
+        "most",
+        "all"
+      ]
+    },
+    "http://registry.gpii.net/common/screenReaderTTSEnabled": {
+      "id": "#screenReaderTTSEnabled",
+      "title": "ScreenReaderTTSEnabled",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/pitch": {
+      "id": "#pitch",
+      "title": "Pitch",
+      "type": "number",
+      "description": "Pitch of a speech synthesizer.",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "http://registry.gpii.net/common/readingUnit": {
+      "id": "#readingUnit",
+      "title": "ReadingUnit",
+      "type": "string",
+      "enum": [
+        "word",
+        "line",
+        "sentence",
+        "paragraph"
+      ]
+    },
+    "http://registry.gpii.net/common/volumeTTS": {
+      "id": "#volumeTTS",
+      "title": "VolumeTTS"
+    },
+    "http://registry.gpii.net/common/selfVoicingEnabled": {
+      "id": "#selfVoicingEnabled",
+      "title": "SelfVoicingEnabled",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/brailleMode": {
+      "id": "#brailleMode",
+      "title": "BrailleMode",
+      "type": "string",
+      "description": "type of representation in Braille: exact representation of what is on the screen (line mode), strict representation of the output of the speech synthesiser (speech box or speech history mode), or more descriptive (structured mode)",
+      "enum": [
+        "line",
+        "structured",
+        "speechHistory"
+      ]
+    },
+    "http://registry.gpii.net/common/screenOffTime": {
+      "id": "#screenOffTime",
+      "title": "ScreenOffTime",
+      "description": "The number of seconds to wait before turning off the display.",
+      "type": "number",
+      "minimum": 0
+    },
+    "http://registry.gpii.net/common/screenRotation": {
+      "id": "#screenRotation",
+      "title": "ScreenRotation",
+      "type": "integer",
+      "enum": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "http://registry.gpii.net/common/screenDefaultRotation": {
+      "id": "#screenDefaultRotation",
+      "title": "ScreenDefaultRotation",
+      "type": "integer",
+      "enum": [
+        0,
+        90,
+        180,
+        270
+      ]
+    },
+    "http://registry.gpii.net/common/screenDim": {
+      "id": "#screenDim",
+      "title": "ScreenDim",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/onScreenKeyboardEnabled": {
+      "id": "#onScreenKeyboardEnabled",
+      "title": "OnScreenKeyboardEnabled",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/initDelay": {
+      "id": "#initDelay",
+      "title": "InitDelay",
+      "description": "Mouse keys initial delay in milliseconds",
+      "type": "integer",
+      "minimum": 0
+    },
+    "http://registry.gpii.net/common/cursorSpeed": {
+      "id": "#cursorSpeed",
+      "title": "CursorSpeed",
+      "description": "Speed at which a “mouse” cursor or relative pointing device moves across the screen."
+    },
+    "http://registry.gpii.net/common/cursorAcceleration": {
+      "id": "#cursorAcceleration",
+      "title": "CursorAcceleration",
+      "description": "Initial value for the acceleration of a mouse cursor or relative pointing device from rest to its closing speed."
+    },
+    "http://registry.gpii.net/common/mouseEmulationEnabled": {
+      "id": "#mouseEmulationEnabled",
+      "title": "MouseEmulationEnabled",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/stickyKeys": {
+      "id": "#stickyKeys",
+      "title": "StickyKeys",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/slowKeysInterval": {
+      "id": "#slowKeysInterval",
+      "title": "SlowKeysInterval",
+      "description": "Interval before a key press is detected when slow keys is being used.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "http://registry.gpii.net/common/slowKeysEnable": {
+      "id": "#slowKeysEnable",
+      "title": "SlowKeysEnable",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/debounceEnable": {
+      "id": "#debounceEnable",
+      "title": "DebounceEnable",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/debounceInterval": {
+      "id": "#debounceInterval",
+      "title": "DebounceInterval",
+      "description": "Interval, in seconds, when repeated keystrokes presses of the same character key are ignored when debounce is being used.",
+      "exclusiveMinimum": 0
+    },
+    "http://registry.gpii.net/common/hapticFeedback": {
+      "id": "#hapticFeedback",
+      "title": "HapticFeedback",
+      "type": "string",
+      "enum": [
+        "none",
+        "always"
+      ]
+    },
+    "http://registry.gpii.net/common/adaptationPreference": {
+      "id": "#adaptationPreference",
+      "title": "AdaptationPreference",
+      "type": "string"
+    },
+    "http://registry.gpii.net/common/tableOfContents": {
+      "id": "#tableOfContents",
+      "title": "TableOfContents",
+      "type": "boolean"
+    },
+    "http://registry.gpii.net/common/volume": {
+      "id": "#volume",
+      "title": "Volume",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "http://registry.gpii.net/common/language": {
+      "id": "#language",
+      "title": "Language",
+      "type": "string"
+    }
+  }
+}

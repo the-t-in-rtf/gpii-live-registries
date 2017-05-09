@@ -1,0 +1,6 @@
+{
+  "type": "lsrDefaults",
+  "options": {
+    "gradeNames": ["gpii.lsr.validator"]
+  }
+}

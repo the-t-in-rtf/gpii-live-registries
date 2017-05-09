@@ -1,7 +1,7 @@
 General background
 
 The `data/gpii` directory in this repository contains a subdirectory for `solutions` and another for `settings`.  Within
-each directory is a collection of [JSON](http://json.org/) and JSON5 files.
+each directory is a collection of [JSON](http://json.org/) and [JSON5](http://json5.org/) files.
 
 Each of these files corresponds directly to the options used in defining a Fluid
 [component grade](http://docs.fluidproject.org/infusion/development/ComponentGrades.html).
@@ -29,8 +29,6 @@ fluid.defaults("gpii.solutions.windows.myHelpfulProgram", {
     // Options from above example, omitted for brevity.
 });
 ```
-
-This convention, storing every grade in a single named file ensures that every grade has a completely unique namespace.
 
 # Extending an existing options file
 
