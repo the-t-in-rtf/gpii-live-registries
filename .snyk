@@ -1,0 +1,50 @@
+# Snyk (https://snyk.io) policy file, patches or ignores known vulnerabilities.
+version: v1.7.1
+ignore: {}
+# patches apply the minimum changes required to fix a vulnerability
+patch:
+  'npm:debug:20170905':
+    - gpii-json-schema > gpii-express > express > serve-static > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - kettle > express > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - kettle > express > serve-static > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - kettle > express-session > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-express > express-session > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-launcher > kettle > express-session > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - kettle > body-parser > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-express > body-parser > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-launcher > kettle > body-parser > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - kettle > serve-static > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-launcher > kettle > serve-static > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - kettle > express > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-launcher > kettle > express > serve-static > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-express > express > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-launcher > kettle > express > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-express > express > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-launcher > kettle > express > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-handlebars > gpii-express > body-parser > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-handlebars > gpii-express > express > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-handlebars > gpii-express > express > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-handlebars > gpii-express > express > serve-static > send > debug:
+        patched: '2017-09-28T08:05:11.021Z'
+    - gpii-json-schema > gpii-handlebars > gpii-express > express-session > debug:
+        patched: '2017-09-28T08:05:11.021Z'

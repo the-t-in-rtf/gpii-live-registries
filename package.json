@@ -4,7 +4,9 @@
   "description": "Contains solutions and settings data used to power the GPII autopersonalisation system.",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover tests/all-tests.js"
+    "test": "istanbul cover tests/all-tests.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,8 @@
     "gpii-json-schema": "^1.0.1-dev.20170504T114351Z.4cef9db",
     "gpii-launcher": "^1.0.0-dev.20170504T113435Z.c5b7001",
     "infusion": "git://github.com/amb26/infusion.git#3ee14d99e2169e9870dffcbd1119aa109a3277c8",
-    "kettle": "^1.4.0"
+    "kettle": "^1.4.0",
+    "snyk": "^1.41.1"
   },
   "devDependencies": {
     "eslint": "3.15.0",
@@ -32,5 +35,6 @@
     "istanbul": "0.4.5",
     "mkdirp": "^0.5.1",
     "node-jqunit": "1.1.4"
-  }
+  },
+  "snyk": true
 }
